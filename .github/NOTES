@@ -2,6 +2,12 @@ Add subkeys:
 
 ????
 
+Publish:
+
+gpg --send-keys --keyserver keyserver.ubuntu.com $KEYID
+gpg --send-keys --keyserver pgp.mit.edu $KEYID
+gpg --send-keys --keyserver pool.sks-keyservers.net $KEYID
+
 Backup:
 
 gpg --export --armor pcampbell@kemitix.net > gpg-key-backup.asc
@@ -43,3 +49,5 @@ gpg --export-secret-keys --armor pcampbell@kemitix.net >> codesigning.asc
 Encrypt keys:
 
 gpg --symmetric --cipher-algo AES256 codesigning.asc
+
+shred codesigning.asc
