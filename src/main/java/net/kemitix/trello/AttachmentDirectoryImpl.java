@@ -17,19 +17,22 @@ public class AttachmentDirectoryImpl implements AttachmentDirectory {
     private static final Logger LOG =
             Logger.getLogger(
                     AttachmentDirectoryImpl.class.getName());
+    private static final String ILLEGAL_CHARS = "[\\\\/:*?\"<>|]";
 
     private Path dir;
     private List<File> toDelete = new ArrayList<>();
 
     @PostConstruct
-    void init() throws IOException {
+    public void init() throws IOException {
         dir = Files.createTempDirectory("attachments");
         LOG.info("Attachments directory: " + dir);
     }
 
     @Override
     public File createFile(File fileName) {
-        File file = dir.resolve(fileName.getName()).toFile();
+        String cleanFilename = fileName.getName()
+                .replaceAll(ILLEGAL_CHARS, "");
+        File file = dir.resolve(cleanFilename).toFile();
         LOG.info("Created attachment: " + file);
         toDelete.add(file);
         return file;
