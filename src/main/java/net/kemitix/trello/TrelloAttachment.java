@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.nio.channels.Channels;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 public class TrelloAttachment implements Attachment {
@@ -17,7 +18,6 @@ public class TrelloAttachment implements Attachment {
             Logger.getLogger(
                     TrelloAttachment.class.getName());
 
-    private static final String[] EXTENSIONS = new String[]{"doc", "docx", "odt"};
     private final com.julienvey.trello.domain.Attachment attachment;
     private final Card card;
     private final AttachmentDirectory attachmentDirectory;
@@ -51,12 +51,10 @@ public class TrelloAttachment implements Attachment {
     private String extension() {
         URI uri = URI.create(attachment.getUrl());
         String path = uri.getPath();
-        for (String ex : EXTENSIONS) {
-            if (path.endsWith("." + ex)) {
-                return ex;
-            }
-        }
-        return "";
+        return Optional.ofNullable(path)
+                .filter(f -> f.contains("."))
+                .map(f -> f.substring(path.lastIndexOf(".") + 1))
+                .orElse("");
     }
 
     @Override
