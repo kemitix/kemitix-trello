@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.channels.Channels;
+import java.nio.charset.StandardCharsets;
+import java.text.Normalizer;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -45,7 +48,12 @@ public class TrelloAttachment implements Attachment {
     @Override
     public File getFilename() {
         return new File(String.format("%4s - %s.%s",
-                id, card.getName(), extension()));
+                id, safeCardName(), extension()));
+    }
+
+    private String safeCardName() {
+        String normalize = Normalizer.normalize(card.getName(), Normalizer.Form.NFD);
+        return normalize.replaceAll("[^\\p{ASCII}]", "");
     }
 
     private String extension() {
