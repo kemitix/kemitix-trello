@@ -27,4 +27,23 @@ public class TrelloAttachmentTest
         //then
         assertThat(filename.getName()).endsWith(".extension");
     }
+
+    @Test
+    void convertsUnsafeFilename() {
+        //given
+        Attachment attachment = new Attachment();
+        attachment.setUrl("file.txt");
+        Card card = new Card();
+        card.setIdShort("123");
+        card.setName("Card name Á");
+        AttachmentDirectory dir = new AttachmentDirectoryImpl();
+        var trelloAttachment = TrelloAttachment.create(
+                attachment, card, dir
+        );
+        //when
+        File filename = trelloAttachment.getFilename();
+        //then
+        assertThat(filename.getName()).doesNotContain("Á");
+        assertThat(filename.getName()).isEqualTo(" 123 - Card name A.txt");
+    }
 }
