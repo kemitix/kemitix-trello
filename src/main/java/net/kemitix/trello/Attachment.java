@@ -25,4 +25,13 @@ public interface Attachment {
      */
     File getOriginalFilename();
 
+    /**
+     * Adds the API Key Pair to a {@link TrelloAttachment}, creating a new
+     * instance, but ignored otherwise.
+     *
+     * @param apiKeyPair the key pair to add
+     * @return a new TrelloAttachment instance or itself
+     */
+    Attachment withApiKeyPair(final ApiKeyPair apiKeyPair);
+
 }

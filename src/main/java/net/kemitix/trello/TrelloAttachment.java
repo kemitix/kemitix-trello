@@ -5,12 +5,13 @@ import com.julienvey.trello.domain.Card;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.Authenticator;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
-import java.net.URLEncoder;
+import java.net.URLConnection;
 import java.nio.channels.Channels;
-import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -25,16 +26,19 @@ public class TrelloAttachment implements Attachment {
     private final Card card;
     private final AttachmentDirectory attachmentDirectory;
     private final String id;
+    private final ApiKeyPair apiKeyPair;
 
     private TrelloAttachment(
             com.julienvey.trello.domain.Attachment attachment,
             Card card,
-            AttachmentDirectory attachmentDirectory
+            AttachmentDirectory attachmentDirectory,
+            ApiKeyPair apiKeyPair
     ) {
         this.attachment = attachment;
         this.card = card;
         this.attachmentDirectory = attachmentDirectory;
         this.id = card.getIdShort();
+        this.apiKeyPair = apiKeyPair;
     }
 
     public static Attachment create(
@@ -42,7 +46,16 @@ public class TrelloAttachment implements Attachment {
             Card card,
             AttachmentDirectory dir
     ) {
-        return new TrelloAttachment(attachment, card, dir);
+        return new TrelloAttachment(attachment, card, dir, ApiKeyPair.none());
+    }
+
+    public static Attachment create(
+            com.julienvey.trello.domain.Attachment attachment,
+            Card card,
+            AttachmentDirectory dir,
+            ApiKeyPair apiKeyPair
+    ) {
+        return new TrelloAttachment(attachment, card, dir, apiKeyPair);
     }
 
     @Override
@@ -67,7 +80,11 @@ public class TrelloAttachment implements Attachment {
 
     @Override
     public LocalAttachment download() {
-        try (var source = Channels.newChannel(getUrl().openStream());){
+        if (apiKeyPair == ApiKeyPair.none()) {
+            throw new UnsupportedOperationException(
+                    "Download not permitted without a valid API KeyPair");
+        }
+        try (var source = Channels.newChannel(getConnection().getInputStream());) {
             File filename = new File(attachment.getName());
             LOG.info("Downloading from " + filename);
             var file = attachmentDirectory.createFile(getFilename());
@@ -82,9 +99,22 @@ public class TrelloAttachment implements Attachment {
         }
     }
 
+    private URLConnection getConnection() throws IOException {
+        var connection = (HttpURLConnection) getUrl().openConnection();
+        connection.setRequestProperty("Authorization", String.format(
+                "OAuth oauth_consumer_key=\"%s\", oauth_token=\"%s\"",
+                apiKeyPair.getKey(), apiKeyPair.getToken()));
+        return connection;
+    }
+
     @Override
     public File getOriginalFilename() {
         return getFilename();
+    }
+
+    @Override
+    public Attachment withApiKeyPair(ApiKeyPair apiKeyPair) {
+        return create(attachment, card, attachmentDirectory, apiKeyPair);
     }
 
     private URL getUrl() throws MalformedURLException {
