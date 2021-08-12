@@ -35,4 +35,9 @@ public class LocalAttachment
     public LocalAttachment download() {
         return this;
     }
+
+    @Override
+    public Attachment withApiKeyPair(ApiKeyPair apiKeyPair) {
+        return this;
+    }
 }

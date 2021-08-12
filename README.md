@@ -19,3 +19,11 @@ This wraps the `com.taskadapter:trello-java-wrapper` library.
 It is intended for use on my `slushy` and `fuller` projects. It was originally developed as part of `slushy` and was extracted when preparing to start on `fuller` which would need some of the same functionality.
 
 Requires JDK 11+
+
+## Downloading Attachments
+
+From 1.1.0 of `kemitix-trello` support is included for downloading attachments
+using the now required authorised methods. In order to do so the API key and 
+token are needed to download the attachment. These are provided either when 
+creating the new `TrelloAttachment` constructor, or by calling the method
+`withApiKeyPair(...)`, which will return a new instance.
