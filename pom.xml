@@ -12,19 +12,17 @@
     </parent>
 
     <artifactId>kemitix-trello</artifactId>
-    <version>1.1.0</version>
+    <version>2.0.0</version>
 
     <properties>
         <tiles-maven-plugin.version>2.18</tiles-maven-plugin.version>
         <kemitix-tiles.version>2.10.0</kemitix-tiles.version>
 
         <trello-java-wrapper.version>0.14</trello-java-wrapper.version>
-        <lombok.version>1.18.16</lombok.version>
-        <camel-api.version>3.6.0</camel-api.version>
-        <junit.version>5.6.1</junit.version>
+        <lombok.version>1.18.22</lombok.version>
+        <camel-api.version>3.12.0</camel-api.version>
+        <junit.version>5.8.2</junit.version>
         <assertj.version>3.18.1</assertj.version>
-        <jakarta.enterprise.cdi-api.version>2.0.2
-        </jakarta.enterprise.cdi-api.version>
     </properties>
 
     <dependencies>
@@ -43,11 +41,6 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-api</artifactId>
             <version>${camel-api.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.enterprise</groupId>
-            <artifactId>jakarta.enterprise.cdi-api</artifactId>
-            <version>${jakarta.enterprise.cdi-api.version}</version>
         </dependency>
 
         <dependency>

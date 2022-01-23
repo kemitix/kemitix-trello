@@ -5,21 +5,14 @@ import com.julienvey.trello.TrelloHttpClient;
 import com.julienvey.trello.domain.Member;
 import com.julienvey.trello.impl.http.JDKTrelloHttpClient;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
 
-@ApplicationScoped
 public class TrelloProducers {
 
-    @Produces
-    @ApplicationScoped
-    TrelloHttpClient trelloHttpClient() {
+    public TrelloHttpClient trelloHttpClient() {
         return new JDKTrelloHttpClient();
     }
 
-    @Produces
-    @ApplicationScoped
-    TrelloClient trello(
+    public TrelloClient trello(
             TrelloConfig config,
             TrelloHttpClient httpClient
     ) {
@@ -29,9 +22,7 @@ public class TrelloProducers {
                 httpClient);
     }
 
-    @Produces
-    @ApplicationScoped
-    Member member(Trello trello, TrelloConfig trelloConfig) {
+    public Member member(Trello trello, TrelloConfig trelloConfig) {
         return trello.getMemberInformation(trelloConfig.getUserName());
     }
 
