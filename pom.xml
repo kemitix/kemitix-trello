@@ -19,9 +19,9 @@
         <kemitix-tiles.version>2.10.0</kemitix-tiles.version>
 
         <trello-java-wrapper.version>0.14</trello-java-wrapper.version>
-        <lombok.version>1.18.16</lombok.version>
-        <camel-api.version>3.6.0</camel-api.version>
-        <junit.version>5.6.1</junit.version>
+        <lombok.version>1.18.22</lombok.version>
+        <camel-api.version>3.12.0</camel-api.version>
+        <junit.version>5.8.2</junit.version>
         <assertj.version>3.18.1</assertj.version>
     </properties>
 
