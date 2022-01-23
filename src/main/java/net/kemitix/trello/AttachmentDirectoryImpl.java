@@ -1,8 +1,5 @@
 package net.kemitix.trello;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.ApplicationScoped;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-@ApplicationScoped
 public class AttachmentDirectoryImpl implements AttachmentDirectory {
 
     private static final Logger LOG =
@@ -22,7 +18,6 @@ public class AttachmentDirectoryImpl implements AttachmentDirectory {
     private Path dir;
     private List<File> toDelete = new ArrayList<>();
 
-    @PostConstruct
     public void init() throws IOException {
         dir = Files.createTempDirectory("attachments");
         LOG.info("Attachments directory: " + dir);
@@ -38,7 +33,6 @@ public class AttachmentDirectoryImpl implements AttachmentDirectory {
         return file;
     }
 
-    @PreDestroy
     public void deleteFiles() {
         toDelete.stream()
                 .peek(file -> LOG.info("Deleting: " + file))

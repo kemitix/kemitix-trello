@@ -6,9 +6,6 @@ import com.julienvey.trello.domain.*;
 import com.julienvey.trello.domain.Attachment;
 import lombok.extern.java.Log;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -16,7 +13,6 @@ import java.util.stream.Stream;
 import static net.kemitix.trello.ListUtils.map;
 
 @Log
-@ApplicationScoped
 public class TrelloBoard {
 
     private final Trello trello;
@@ -24,7 +20,6 @@ public class TrelloBoard {
 
     private List<TList> lists;
 
-    @Inject
     public TrelloBoard(
             Trello trello,
             TrelloConfig trelloConfig
@@ -33,8 +28,7 @@ public class TrelloBoard {
         this.trelloConfig = trelloConfig;
     }
 
-    @PostConstruct
-    void init () {
+    public void init () {
         lists = board().fetchLists();
     }
 

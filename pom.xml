@@ -23,8 +23,6 @@
         <camel-api.version>3.6.0</camel-api.version>
         <junit.version>5.6.1</junit.version>
         <assertj.version>3.18.1</assertj.version>
-        <jakarta.enterprise.cdi-api.version>2.0.2
-        </jakarta.enterprise.cdi-api.version>
     </properties>
 
     <dependencies>
@@ -43,11 +41,6 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-api</artifactId>
             <version>${camel-api.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.enterprise</groupId>
-            <artifactId>jakarta.enterprise.cdi-api</artifactId>
-            <version>${jakarta.enterprise.cdi-api.version}</version>
         </dependency>
 
         <dependency>
