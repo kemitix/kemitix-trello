@@ -12,7 +12,7 @@
     </parent>
 
     <artifactId>kemitix-trello</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
 
     <properties>
         <tiles-maven-plugin.version>2.18</tiles-maven-plugin.version>
@@ -20,7 +20,6 @@
 
         <trello-java-wrapper.version>0.14</trello-java-wrapper.version>
         <lombok.version>1.18.22</lombok.version>
-        <camel-api.version>3.12.0</camel-api.version>
         <junit.version>5.8.2</junit.version>
         <assertj.version>3.18.1</assertj.version>
     </properties>
@@ -36,11 +35,34 @@
             <groupId>com.taskadapter</groupId>
             <artifactId>trello-java-wrapper</artifactId>
             <version>${trello-java-wrapper.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpmime</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-api</artifactId>
-            <version>${camel-api.version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.5.13</version>
         </dependency>
 
         <dependency>
