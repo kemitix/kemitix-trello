@@ -20,7 +20,6 @@
 
         <trello-java-wrapper.version>0.14</trello-java-wrapper.version>
         <lombok.version>1.18.22</lombok.version>
-        <camel-api.version>3.12.0</camel-api.version>
         <junit.version>5.8.2</junit.version>
         <assertj.version>3.18.1</assertj.version>
     </properties>
@@ -36,11 +35,6 @@
             <groupId>com.taskadapter</groupId>
             <artifactId>trello-java-wrapper</artifactId>
             <version>${trello-java-wrapper.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-api</artifactId>
-            <version>${camel-api.version}</version>
         </dependency>
 
         <dependency>
