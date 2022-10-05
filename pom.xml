@@ -12,12 +12,13 @@
     </parent>
 
     <artifactId>kemitix-trello</artifactId>
-    <version>2.0.2</version>
+    <version>2.0.3</version>
 
     <properties>
         <tiles-maven-plugin.version>2.18</tiles-maven-plugin.version>
         <kemitix-tiles.version>2.10.0</kemitix-tiles.version>
 
+        <dependency-check-maven.version>7.2.1</dependency-check-maven.version>
         <trello-java-wrapper.version>0.14</trello-java-wrapper.version>
         <jackson.version>2.14.0-rc1</jackson.version>
         <httpmime.version>4.5.13</httpmime.version>
@@ -102,6 +103,24 @@
                         <!--<tile>net.kemitix.tiles:pmd-strict:${kemitix-tiles.version}</tile>-->
                     </tiles>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>${dependency-check-maven.version}</version>
+                <configuration>
+                    <skipProvidedScope>true</skipProvidedScope>
+                    <skipRuntimeScope>true</skipRuntimeScope>
+                    <skipTestScope>true</skipTestScope>
+                    <failBuildOnCVSS>7</failBuildOnCVSS>
+                </configuration>
+                <executions>
+                <execution>
+                    <goals>
+                        <goal>check</goal>
+                    </goals>
+                </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
