@@ -1,0 +1,10 @@
+on:
+  schedule:
+    - cron: '30 5 * * *'
+
+jobs:
+  test_dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check dependencies
+        run: mvn dependency-check:check
