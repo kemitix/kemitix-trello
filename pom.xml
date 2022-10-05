@@ -12,7 +12,7 @@
     </parent>
 
     <artifactId>kemitix-trello</artifactId>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
 
     <properties>
         <tiles-maven-plugin.version>2.18</tiles-maven-plugin.version>
