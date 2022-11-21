@@ -18,7 +18,7 @@
         <tiles-maven-plugin.version>2.30</tiles-maven-plugin.version>
         <kemitix-tiles.version>2.10.0</kemitix-tiles.version>
 
-        <dependency-check-maven.version>7.2.1</dependency-check-maven.version>
+        <dependency-check-maven.version>7.3.2</dependency-check-maven.version>
         <trello-java-wrapper.version>0.14</trello-java-wrapper.version>
         <jackson.version>2.14.0-rc1</jackson.version>
         <commons-codec.version>1.15</commons-codec.version>
