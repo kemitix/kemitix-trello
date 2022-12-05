@@ -22,7 +22,7 @@
         <trello-java-wrapper.version>0.14</trello-java-wrapper.version>
         <jackson.version>2.14.0-rc1</jackson.version>
         <commons-codec.version>1.15</commons-codec.version>
-        <httpmime.version>4.5.13</httpmime.version>
+        <httpmime.version>4.5.14</httpmime.version>
         <lombok.version>1.18.24</lombok.version>
         <junit.version>5.9.1</junit.version>
         <assertj.version>3.23.1</assertj.version>
