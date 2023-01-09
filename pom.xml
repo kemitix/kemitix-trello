@@ -25,7 +25,7 @@
         <httpmime.version>4.5.13</httpmime.version>
         <lombok.version>1.18.24</lombok.version>
         <junit.version>5.9.1</junit.version>
-        <assertj.version>3.23.1</assertj.version>
+        <assertj.version>3.24.1</assertj.version>
     </properties>
 
     <dependencies>
